@@ -42,13 +42,6 @@ public class HomeController {
 		mv.setViewName("/index");
 		return mv;
 	}
-
-	@GetMapping("/whatDidIEat")
-	public String whatDidIEat(Locale locale, Model model) {
-		logger.info("Welcome What Did I Eat? to Get");
-		
-		return "/contents/whatDidIEat";
-	}
 	
 	@GetMapping("/contact")
 	public String contact(Locale locale, Model model) {
