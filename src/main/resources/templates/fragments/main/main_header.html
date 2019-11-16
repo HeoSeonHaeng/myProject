@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="mainHead">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Latest updates and statistic charts">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- //기본적인 html head 추가부 -->
+	<th:block layout:fragment="html_head"></th:block>
+<!--     <th:block th:include="fragments/common/c_head"></th:block> -->
+	<!--begin::Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+
+	<!--end::Fonts -->
+	<!--begin::Page Vendors Styles(used by this page) -->
+	<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+
+	<!--end::Page Vendors Styles -->
+
+	<!--begin::Global Theme Styles(used by all pages) -->
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+	<!--end::Global Theme Styles -->
+
+	<!--begin::Layout Skins(used by all pages) -->
+
+	<!--end::Layout Skins -->
+	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+<!--     <link rel="stylesheet" th:href="@{/lib/AdminLTE-2.4.2/css/AdminLTE.min.css}" /> -->
+<!--     <link rel="stylesheet" th:href="@{/lib/AdminLTE-2.4.2/css/skins/_all-skins.css}" /> -->
+
+<!--     <link rel="stylesheet" th:href="@{/css/common/common_main.css}" /> -->
+
+    <th:block layout:fragment="custom_css"></th:block>
+
+</head>
+</html>
