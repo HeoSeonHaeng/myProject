@@ -6,7 +6,7 @@
 </th:block>
 
 <th:block layout:fragment="custom_css">
-    
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 </th:block>
 
 
@@ -22,14 +22,71 @@
 <h1 class="h4 mb-2 text-gray-800">가계부</h1>
 <p class="mb-4">오늘도 나는 얼마나 먹은걸까?</p>
 
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      	예산 사용 현황
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="statusTable" width="100%" cellspacing="0">
+         <colgroup>
+			<col width="5%" />
+			<col width="8%" />
+			<col width="12%" />
+			<col width="12%" />
+			<col width="12%" />
+			<col width="12%" />
+			<col width="auto" />
+		 </colgroup>
+          <thead>
+            <tr>
+              <th>지출내역</th>
+              <th>목표예산</th>
+              <th>실사용금액</th>
+              <th>예산사용율</th>
+              <th>예산잔액</th>
+              <th>초과지출소명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">저축/투자</td>
+              <td class="text-right">410000</td>
+              <td class="text-right">0</td>
+              <td class="text-right">0%</td>
+              <td class="text-right">410000</td>
+              <td class="text-left"></td>
+            </tr>
+            <tr>
+              <td class="text-center">주거</td>
+              <td class="text-right">410000</td>
+              <td class="text-right">0</td>
+              <td class="text-right">0%</td>
+              <td class="text-right">410000</td>
+              <td class="text-left"></td>
+            </tr>
+            <tr>
+              <td class="text-center">생활용품</td>
+              <td class="text-right">410000</td>
+              <td class="text-right">0</td>
+              <td class="text-right">0%</td>
+              <td class="text-right">410000</td>
+              <td class="text-left"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <div class="">
-      	<a href="#" class="btn btn-success btn-icon-split">
-          <span class="icon text-white-50"><i class="fas fa-file-excel"></i></span>
-          <span class="text">Excel Upload</span>
+      	<th:block th:each="index : ${#numbers.sequence(1,12)}">
+      	<a href="#" class="btn btn-info btn-icon-split" style="width: 8%;">
+          <span class="text" th:text="${index+'월'}"></span>
         </a>
+      	</th:block>
       </div>
     </div>
     <div class="card-body">
@@ -73,9 +130,38 @@
             <tr>
               <td class="text-center">1</td>
               <td class="text-center">
-				<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="    line-height: 1.0;">
-                   	식대
-                </button>
+              	<div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   	 선택하세요
+                  </button>
+                  <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                    <a class="dropdown-item" href="#">저축/투자</a>
+                    <a class="dropdown-item" href="#">주거</a>
+                    <a class="dropdown-item" href="#">생활용품</a>
+                  </div>
+                </div>
+<!-- 				<div class="dropdown"> -->
+<!--                   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!--                     	선택하세요 -->
+<!--                   </button> -->
+<!--                   <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton"> -->
+<!--                     <a class="dropdown-item" href="#">저축/투자</a> -->
+<!--                     <a class="dropdown-item" href="#">주거</a> -->
+<!--                     <a class="dropdown-item" href="#">생활용품</a> -->
+<!--                     <a class="dropdown-item" href="#">의복_미용</a> -->
+<!--                     <a class="dropdown-item" href="#">건강</a> -->
+<!--                     <a class="dropdown-item" href="#">자기계발</a> -->
+<!--                     <a class="dropdown-item" href="#">자동차</a> -->
+<!--                     <a class="dropdown-item" href="#">육아</a> -->
+<!--                     <a class="dropdown-item" href="#">보험</a> -->
+<!--                     <a class="dropdown-item" href="#">이벤트</a> -->
+<!--                     <a class="dropdown-item" href="#">경조사</a> -->
+<!--                     <a class="dropdown-item" href="#">헌금</a> -->
+<!--                     <a class="dropdown-item" href="#">기부</a> -->
+<!--                     <a class="dropdown-item" href="#">통신비</a> -->
+<!--                     <a class="dropdown-item" href="#">기타</a> -->
+<!--                   </div> -->
+<!--                 </div> -->
 			 </td>
               <td class="text-center">2019-11-17 12:23</td>
               <td class="text-right">30000</td>
