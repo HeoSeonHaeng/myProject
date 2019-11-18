@@ -14,14 +14,18 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.my.project.contents.excelUpt.ExcelInfo;
+import com.my.project.controller.HomeController;
 
 @Service
 public class ExcelImport {
-
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	public static List<ExcelInfo> getExcelInfoList(MultipartFile file ) throws EncryptedDocumentException, IOException { 
 		List<ExcelInfo> excelInfoList = new ArrayList<ExcelInfo>(); 
 		
@@ -67,7 +71,7 @@ public class ExcelImport {
 				 		excelInfo.setAfterAmt((getValueFromCell(cell)).toString()); 
 				 		break; 
 				 	case 5: // 거래내용
-				 		excelInfo.setTradeComment((getValueFromCell(cell)).toString()); 
+				 		excelInfo.setTradeComment((getValueFromCell(cell)).toString());
 				 		break; 
 				 }
 			 }

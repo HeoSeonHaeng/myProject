@@ -35,8 +35,28 @@
 	    </div>
 	  </div>
 	</div>
-<!--     <script th:src="@{/lib/AdminLTE-2.4.2/js/adminlte.min.js}"></script> -->
-<!--     <script th:src="@{/js/common/common_main.js}"></script> -->
+	<!-- fileUpload Modal-->
+	<div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Excel File Upload</h5>
+	        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">×</span>
+	        </button>
+	      </div>
+			<div class="modal-body">
+				<div id="dropzone">
+					<form action="excelFileUpload" method="post" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="excelFileUpload">
+					  <div class="fallback">
+					    <input name="file" type="file" multiple />
+					  </div>
+					</form>
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
 
 	<!-- Bootstrap core JavaScript-->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
@@ -48,8 +68,8 @@
 	<!-- Custom scripts for all pages-->
 	<script th:src="@{/js/sb-admin-2.min.js}"></script>
 	<script th:src="@{/custom/js/custom.js}"></script>
-	
+	<script th:src="@{/custom/dropzone/js/dropzone.js}"></script>
 	<th:block layout:fragment="custom_js"></th:block>
-
+	
 </body>
 </html>

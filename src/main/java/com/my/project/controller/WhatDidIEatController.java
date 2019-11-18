@@ -32,7 +32,7 @@ public class WhatDidIEatController {
 	}
 	
 	@PostMapping("/excelFileUpload")
-	public String excelFileUpload(@RequestParam("excelFileUpload") MultipartFile multipartFile, Model model) throws EncryptedDocumentException, IOException {
+	public String excelFileUpload(@RequestParam("file") MultipartFile multipartFile, Model model) throws EncryptedDocumentException, IOException {
 		logger.info("Excel File Upload to Post!!");
 		
 		wdieService.excelFileUpload(multipartFile);

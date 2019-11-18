@@ -23,8 +23,8 @@
 <p class="mb-4">오늘도 나는 얼마나 먹은걸까?</p>
 
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      	예산 사용 현황
+    <div class="card-header badge-info">
+		<h5>이달의 예산 사용 현황</h5>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -81,12 +81,18 @@
 <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <div class="">
+      <div class="monthArea">
       	<th:block th:each="index : ${#numbers.sequence(1,12)}">
       	<a href="#" class="btn btn-info btn-icon-split" style="width: 8%;">
           <span class="text" th:text="${index+'월'}"></span>
         </a>
       	</th:block>
+      	<a href="#" class="btn btn-success btn-icon-split mt-2 " style="width: 8%;" data-toggle="modal" data-target="#fileUploadModal">
+          <span class="text">ExcelUpload</span>
+        </a>
+      </div>
+      <div class="btn-group mt-2">
+      	
       </div>
     </div>
     <div class="card-body">
@@ -135,9 +141,9 @@
                    	 선택하세요
                   </button>
                   <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                    <a class="dropdown-item" href="#">저축/투자</a>
-                    <a class="dropdown-item" href="#">주거</a>
-                    <a class="dropdown-item" href="#">생활용품</a>
+                    <div class="dropdown-item">저축/투자</div>
+                    <div class="dropdown-item">주거</div>
+                    <div class="dropdown-item">생활용품</div>
                   </div>
                 </div>
 <!-- 				<div class="dropdown"> -->
@@ -189,6 +195,11 @@
 	
 	<!-- Page level custom scripts -->
 	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+	<script>
+		$(document).ready(function(){
+			
+		});
+	</script>
 </th:block>
 
 </html>

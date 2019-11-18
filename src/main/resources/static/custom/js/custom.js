@@ -1,6 +1,4 @@
-//$(function(){
-//    $(".nav").each(function()
-//    {
-//        new ResponsiveNav($(this), 600);
-//    });
-//});
+$('.dropdown .dropdown-item').on('click', function(){
+	$('#dropdownMenuButton').text( $(this).text() );
+});
+
