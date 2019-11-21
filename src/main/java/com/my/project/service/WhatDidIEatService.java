@@ -1,10 +1,14 @@
 package com.my.project.service;
 
-import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.poi.EncryptedDocumentException;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.my.project.model.Account;
+
+
 public interface WhatDidIEatService {
-	public void excelFileUpload(MultipartFile file) throws EncryptedDocumentException, IOException;
+	public Map<String, String> excelFileUpload(MultipartFile file);
+	public List<Account> getAccountList();
 }

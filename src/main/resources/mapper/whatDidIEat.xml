@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+
+<mapper namespace="com.my.project.api">
+	<select id="selectName" resultType="string">
+		SELECT TRADE_COMMENT 
+		  FROM ACCOUNT
+	</select>
+	
+	<select id="getAccountList" resultType="Account">
+		/* getAccountList */
+		SELECT ACCOUNT_ID
+			 , MEMBER_ID
+			 , TRADE_DATE
+			 , WITHDRAW_AMT
+			 , DEPOSIT_AMT
+			 , AFTER_AMT
+			 , TRADE_COMMENT
+			 , REG_DATE
+		  FROM ACCOUNT
+	</select>
+	
+	<insert id="insertAccount" parameterType="Account">
+		/* insertAccount */
+		INSERT 
+		  INTO ACCOUNT 
+		  	 (	MEMBER_ID
+		  	  , TRADE_DATE
+		  	  , WITHDRAW_AMT
+		  	  , DIPOSIT_AMT
+		  	  , AFTER_AMT
+		  	  , TRADE_COMMENT
+		  	  )
+		VALUES
+			 (	#{memberId}
+			  , DATE_FORMAT(#{tradeDate}, '%Y-%m-%d')
+			  , #{withdrawAmt}
+			  , #{dipositAmt}
+			  , #{afterAmt}
+			  , #{tradeComment}
+			  )
+	</insert>
+</mapper>

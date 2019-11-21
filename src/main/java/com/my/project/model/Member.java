@@ -1,12 +1,12 @@
-package com.my.project.contents;
+package com.my.project.model;
 
-import lombok.Builder;
+import org.apache.ibatis.type.Alias;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@Builder
+@Getter @Setter
+@Alias("member")
 public class Member {
 
 	String userNo;

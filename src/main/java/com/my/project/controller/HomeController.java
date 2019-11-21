@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.project.contents.AuthInfo;
-
-
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -30,11 +27,12 @@ public class HomeController {
 		mv.setViewName("index");
 		return mv;
 	}
+	
 	@PostMapping(value = "/index")
-	public ModelAndView index(Locale locale, AuthInfo authInfo, HttpSession session) {
+	public ModelAndView index(Locale locale, HttpSession session) {
 		logger.info("Welcome index to POST!");
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("authInfoVO", authInfo);
+//		mv.addObject("authInfoVO", authInfo);
 		
 		mv.setViewName("index");
 		return mv;

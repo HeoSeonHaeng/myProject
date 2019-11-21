@@ -1,33 +1,34 @@
 package com.my.project.service;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.poi.EncryptedDocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.my.project.contents.excelUpt.ExcelInfo;
-import com.my.project.dao.WhatDidIEatDAO;
+import com.my.project.api.WhatDidIEatDAO;
+import com.my.project.model.Account;
 import com.my.project.util.excel.ExcelImport;
 
 
 @Service
+@Transactional
 public class WhatDidIEatServiceImpl implements WhatDidIEatService {
 	@Autowired
-	WhatDidIEatDAO whatEatDAO;
-	
-	@Autowired
-	ExcelImport excelImport;
+	private WhatDidIEatDAO dao;
 	
 	@Override
-	public void excelFileUpload(MultipartFile file) throws EncryptedDocumentException, IOException {
+	public Map<String, String> excelFileUpload(MultipartFile file)  {
+		ExcelImport excelImport = new ExcelImport();
 		
-		List<ExcelInfo> bcInfoList = excelImport.getExcelInfoList(file);
-		
-		System.out.println(bcInfoList); 
-		
+		return excelImport.insertAccountList(file);
+	}
+
+	@Override
+	public List<Account> getAccountList() {
+		return dao.getAccountList();
 	}
 	
 	
