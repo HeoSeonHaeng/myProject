@@ -1,8 +1,10 @@
-package com.my.project.util.excel;
+package com.my.project.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -15,10 +17,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.my.project.api.WhatDidIEatDAO;
@@ -26,11 +25,7 @@ import com.my.project.controller.HomeController;
 import com.my.project.model.Account;
 
 @Service
-public class ExcelImport {
-	
-	private JdbcTemplate jdbcTemplate;
-    private TransactionTemplate transactionTemplate;
-    private PlatformTransactionManager txManager;
+public class ExcelServiceImpl implements ExcelService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -39,16 +34,8 @@ public class ExcelImport {
 	
 	public Map<String, String> insertAccountList(MultipartFile file ) { 
 		Map<String, String> result = new HashedMap<String, String>();
-		
-		boolean success = false;
-		int loofIdx = 1;
-		
-//		DefaultTransactionDefinition td = new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED);
-//		
-//		td.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
-//		td.setTimeout(10);
-//		
-//		TransactionStatus status = txManager.getTransaction(td);
+		Map<String, Object> accountMap = new HashedMap<String, Object>();
+		List<Account> accountList = new ArrayList<Account>();
 		
 		try {
 			// 웹상에서 업로드 되어 MultipartFile인 경우 바로 InputStream으로 변경하여 사용. 
@@ -65,12 +52,9 @@ public class ExcelImport {
 				Row row = rowItr.next(); // 첫번재 행이 해더인 경우 스킵, 2번째 행부터 data 로드 
 				
 				if(row.getRowNum() == 0) { 
-//					result.put("RESULT", "FAIL");
-//					result.put("msg", "Excel 파일에 저장할 내용이 없습니다.");
-//					break; 
 					continue;
 				}
-				
+
 				Iterator<Cell> cellItr = row.cellIterator(); 
 				
 				// 한행이 한열씩 읽기 (셀 읽기)
@@ -79,54 +63,40 @@ public class ExcelImport {
 					int index = cell.getColumnIndex(); 
 					
 					switch(index) { 
-					case 0: // 번호 
-						excelInfo.setAccountId((getValueFromCell(cell)).toString()); 
-						// 셀이 숫자형인 경우 Double형으로 변환 후 int형으로 변환 
-						break; 
-					case 1: // 거래일시 
+					case 0: // 거래일시 
 						excelInfo.setTradeDate((getValueFromCell(cell)).toString()); 
 						break; 
-					case 2: // 출금액
+					case 1: // 출금액
 						excelInfo.setWithdrawAmt((getValueFromCell(cell)).toString()); 
 						break; 
-					case 3: // 입금액
+					case 2: // 입금액
 						excelInfo.setDepositAmt((getValueFromCell(cell)).toString()); 
 						break; 
-					case 4: // 거래후
+					case 3: // 거래후
 						excelInfo.setAfterAmt((getValueFromCell(cell)).toString()); 
 						break; 
-					case 5: // 거래내용
+					case 4: // 거래내용
 						excelInfo.setTradeComment((getValueFromCell(cell)).toString());
 						break; 
 					}
+					excelInfo.setMemberId("3");
 				}
-				success = dao.insertAccount(excelInfo); 
-				
-				if( !success ) {
-					result.put("RESULT", "FAIL");
-					result.put("msg", loofIdx + "번째 행 저장시  문제가 발생하였습니다.");
-					logger.error(result.get("msg"));
-//			        txManager.rollback(status);
-					success = false;
-					break;
-				}
-				
-				loofIdx++;
+				accountList.add(excelInfo);
+
 			}
+			
+			accountMap.put("list", accountList);
+			
+			dao.insertAccount(accountMap); 
+			
 			
 		} catch (Exception e) {
 			result.put("RESULT", "FAIL");
 			result.put("msg", "파일 내용 저장시 문제가 발생하였습니다. 관리자에게 문의하세요");
 			logger.error(e.toString());
-//	        txManager.rollback(status);
 	    } finally {
-			if(success) {
-				result.put("RESULT", "FAIL");
-				result.put("msg", "정상적으로 저장되었습니다.");
-//				txManager.commit(status);
-			}else {
-//				txManager.rollback(status);
-			}
+			result.put("RESULT", "FAIL");
+			result.put("msg", "정상적으로 저장되었습니다.");
 		}
 		
 		return result;

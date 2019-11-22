@@ -1,4 +1,4 @@
 $('.dropdown .dropdown-item').on('click', function(){
-	$('#dropdownMenuButton').text( $(this).text() );
+	$(this).closest('.dropdown').find('#dropdownMenuButton').text( $(this).text() );
 });
 

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.my.project.api.WhatDidIEatDAO;
 import com.my.project.model.Account;
+import com.my.project.service.ExcelServiceImpl;
 import com.my.project.service.WhatDidIEatServiceImpl;
 
 @Controller
@@ -26,6 +26,9 @@ public class WhatDidIEatController {
 	
 	@Autowired
 	WhatDidIEatServiceImpl wdieService;
+	
+	@Autowired
+	ExcelServiceImpl excelService;
 	
 	@GetMapping("/whatDidIEat")
 	public String whatDidIEat(Locale locale, Model model) throws EncryptedDocumentException, IOException {
@@ -41,7 +44,7 @@ public class WhatDidIEatController {
 	public String excelFileUpload(@RequestParam("file") MultipartFile multipartFile, Model model) throws EncryptedDocumentException, IOException {
 		logger.info("Excel File Upload to Post!!");
 		
-		Map<String, String> map = wdieService.excelFileUpload(multipartFile);
+		Map<String, String> map = excelService.insertAccountList(multipartFile);
 		model.addAttribute("result", map);
 		return "/contents/whatDidIEat";
 	}

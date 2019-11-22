@@ -117,24 +117,11 @@
               <th>입금액</th>
               <th>거래후 잔액</th>
               <th>거래내용</th>
-              <th>코멘트</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>번호</th>
-              <th>분류</th>
-              <th>거래일시</th>
-              <th>지출</th>
-              <th>입금</th>
-              <th>잔액</th>
-              <th>거래내용</th>
-              <th>코멘트</th>
-            </tr>
-          </tfoot>
           <tbody>
-            <tr>
-              <td class="text-center">1</td>
+            <tr th:each="data : ${accountList}">
+              <td class="text-center" th:text="${data.no}"></td>
               <td class="text-center">
               	<div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,35 +133,12 @@
                     <div class="dropdown-item">생활용품</div>
                   </div>
                 </div>
-<!-- 				<div class="dropdown"> -->
-<!--                   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--                     	선택하세요 -->
-<!--                   </button> -->
-<!--                   <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton"> -->
-<!--                     <a class="dropdown-item" href="#">저축/투자</a> -->
-<!--                     <a class="dropdown-item" href="#">주거</a> -->
-<!--                     <a class="dropdown-item" href="#">생활용품</a> -->
-<!--                     <a class="dropdown-item" href="#">의복_미용</a> -->
-<!--                     <a class="dropdown-item" href="#">건강</a> -->
-<!--                     <a class="dropdown-item" href="#">자기계발</a> -->
-<!--                     <a class="dropdown-item" href="#">자동차</a> -->
-<!--                     <a class="dropdown-item" href="#">육아</a> -->
-<!--                     <a class="dropdown-item" href="#">보험</a> -->
-<!--                     <a class="dropdown-item" href="#">이벤트</a> -->
-<!--                     <a class="dropdown-item" href="#">경조사</a> -->
-<!--                     <a class="dropdown-item" href="#">헌금</a> -->
-<!--                     <a class="dropdown-item" href="#">기부</a> -->
-<!--                     <a class="dropdown-item" href="#">통신비</a> -->
-<!--                     <a class="dropdown-item" href="#">기타</a> -->
-<!--                   </div> -->
-<!--                 </div> -->
 			 </td>
-              <td class="text-center">2019-11-17 12:23</td>
-              <td class="text-right">30000</td>
-              <td class="text-right">0</td>
-              <td class="text-right">20,000</td>
-              <td class="text-left">점심</td>
-              <td class="text-left">필수생활비</td>
+              <td class="text-center" th:text="${data.tradeDate}"></td>
+              <td class="text-right" th:text="${data.withdrawAmt}"></td>
+              <td class="text-right" th:text="${data.depositAmt}"></td>
+              <td class="text-right" th:text="${data.afterAmt}"></td>
+              <td class="text-left" th:text="${data.tradeComment}"></td>
             </tr>
           </tbody>
         </table>

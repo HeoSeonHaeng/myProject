@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Account {
+	int no;
 	String accountId; 		//번호 
 	String memberId;			//멤버 ID
 	String tradeDate; 		//거래일시

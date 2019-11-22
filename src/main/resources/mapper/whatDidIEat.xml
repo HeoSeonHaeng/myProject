@@ -9,7 +9,8 @@
 	
 	<select id="getAccountList" resultType="Account">
 		/* getAccountList */
-		SELECT ACCOUNT_ID
+		SELECT @rownum:=@rownum+1 AS NO
+			 , ACCOUNT_ID
 			 , MEMBER_ID
 			 , TRADE_DATE
 			 , WITHDRAW_AMT
@@ -18,26 +19,29 @@
 			 , TRADE_COMMENT
 			 , REG_DATE
 		  FROM ACCOUNT
+		 WHERE (@rownum:=0)=0
 	</select>
 	
-	<insert id="insertAccount" parameterType="Account">
+	<insert id="insertAccount" parameterType="java.util.Map">
 		/* insertAccount */
 		INSERT 
 		  INTO ACCOUNT 
 		  	 (	MEMBER_ID
 		  	  , TRADE_DATE
 		  	  , WITHDRAW_AMT
-		  	  , DIPOSIT_AMT
+		  	  , DEPOSIT_AMT
 		  	  , AFTER_AMT
 		  	  , TRADE_COMMENT
 		  	  )
 		VALUES
-			 (	#{memberId}
-			  , DATE_FORMAT(#{tradeDate}, '%Y-%m-%d')
-			  , #{withdrawAmt}
-			  , #{dipositAmt}
-			  , #{afterAmt}
-			  , #{tradeComment}
+		<foreach collection="list" item="item" separator=" , ">
+			 (	#{item.memberId}
+			  , DATE_FORMAT(#{item.tradeDate}, '%Y-%m-%d%h:%i:%s')
+			  , #{item.withdrawAmt}
+			  , #{item.depositAmt}
+			  , #{item.afterAmt}
+			  , #{item.tradeComment}
 			  )
+		</foreach>
 	</insert>
 </mapper>

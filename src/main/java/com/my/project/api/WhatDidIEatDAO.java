@@ -1,6 +1,7 @@
 package com.my.project.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class WhatDidIEatDAO {
 		return sqlSession.selectList(NAMESPACE + "getAccountList");
 	}
 	
-	public Boolean insertAccount(Account excelInfo) {
-		return sqlSession.insert(NAMESPACE + "insertAccount", excelInfo) > 0 ? true : false;
+	public Boolean insertAccount(Map<String, Object> map) {
+		return sqlSession.insert(NAMESPACE + "insertAccount", map) > 0 ? true : false;
 	}
 }
