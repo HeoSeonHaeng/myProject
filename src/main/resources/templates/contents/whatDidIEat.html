@@ -49,30 +49,18 @@
             </tr>
           </thead>
           <tbody>
+          <th:block th:each="data : ${targetAccountList}">
             <tr>
-              <td class="text-center">저축/투자</td>
-              <td class="text-right">410000</td>
+              <td class="text-center" th:text="${data.codeNm}">저축/투자</td>
+              <td class="text-right" >
+              	<input type="text" id="targetBudget" name="targetBudget" class="txR" th:value="${#numbers.formatInteger(data.targetBudget, 0, 'COMMA')}">
+              </td>
               <td class="text-right">0</td>
               <td class="text-right">0%</td>
               <td class="text-right">410000</td>
-              <td class="text-left"></td>
+              <td class="text-left" th:text="${data.comment}"></td>
             </tr>
-            <tr>
-              <td class="text-center">주거</td>
-              <td class="text-right">410000</td>
-              <td class="text-right">0</td>
-              <td class="text-right">0%</td>
-              <td class="text-right">410000</td>
-              <td class="text-left"></td>
-            </tr>
-            <tr>
-              <td class="text-center">생활용품</td>
-              <td class="text-right">410000</td>
-              <td class="text-right">0</td>
-              <td class="text-right">0%</td>
-              <td class="text-right">410000</td>
-              <td class="text-left"></td>
-            </tr>
+          </th:block>
           </tbody>
         </table>
       </div>
@@ -135,9 +123,9 @@
                 </div>
 			 </td>
               <td class="text-center" th:text="${data.tradeDate}"></td>
-              <td class="text-right" th:text="${data.withdrawAmt}"></td>
-              <td class="text-right" th:text="${data.depositAmt}"></td>
-              <td class="text-right" th:text="${data.afterAmt}"></td>
+              <td class="text-right" th:text="${#numbers.formatInteger(data.withdrawAmt, 0, 'COMMA')}"></td>
+              <td class="text-right" th:text="${#numbers.formatInteger(data.depositAmt, 0, 'COMMA')}"></td>
+              <td class="text-right" th:text="${#numbers.formatInteger(data.afterAmt, 0, 'COMMA')}"></td>
               <td class="text-left" th:text="${data.tradeComment}"></td>
             </tr>
           </tbody>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.my.project.model.Account;
+import com.my.project.model.WhatDidIEatVo;
 import com.my.project.service.ExcelServiceImpl;
 import com.my.project.service.WhatDidIEatServiceImpl;
 
@@ -33,9 +34,13 @@ public class WhatDidIEatController {
 	@GetMapping("/whatDidIEat")
 	public String whatDidIEat(Locale locale, Model model) throws EncryptedDocumentException, IOException {
 		logger.info("Welcome What Did I Eat? to Get");
+		// Excel Upload Data List
 		List<Account> accountList = wdieService.getAccountList();
+		// Target Account Data List
+		List<WhatDidIEatVo> targetAccountList = wdieService.getTargetAccountList();
 		
 		model.addAttribute("accountList", accountList);
+		model.addAttribute("targetAccountList", targetAccountList);
 		
 		return "/contents/whatDidIEat";
 	}

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.my.project.api.WhatDidIEatDAO;
 import com.my.project.model.Account;
+import com.my.project.model.WhatDidIEatVo;
 
 
 @Service
@@ -19,6 +20,11 @@ public class WhatDidIEatServiceImpl implements WhatDidIEatService {
 	@Override
 	public List<Account> getAccountList() {
 		return dao.getAccountList();
+	}
+
+	@Override
+	public List<WhatDidIEatVo> getTargetAccountList() {
+		return dao.getTargetAccountList();
 	}
 	
 	

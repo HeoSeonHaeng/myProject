@@ -8,7 +8,7 @@
     </settings>
  
     <typeAliases>
-        <typeAlias alias="Account" type="com.my.project.model.Account"/>
+        <typeAlias alias="WhatDidIEatVo" type="com.my.project.model.WhatDidIEatVo"/>
     </typeAliases>
  
 </configuration>

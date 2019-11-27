@@ -7,12 +7,12 @@
 		  FROM ACCOUNT
 	</select>
 	
-	<select id="getAccountList" resultType="Account">
+	<select id="getAccountList" resultType="WhatDidIEatVo">
 		/* getAccountList */
 		SELECT @rownum:=@rownum+1 AS NO
 			 , ACCOUNT_ID
 			 , MEMBER_ID
-			 , TRADE_DATE
+			 , DATE_FORMAT(TRADE_DATE, '%Y-%m-%d %h:%i:%s') AS TRADE_DATE
 			 , WITHDRAW_AMT
 			 , DEPOSIT_AMT
 			 , AFTER_AMT
@@ -20,6 +20,7 @@
 			 , REG_DATE
 		  FROM ACCOUNT
 		 WHERE (@rownum:=0)=0
+		 ORDER BY TRADE_DATE DESC, ACCOUNT_ID DESC
 	</select>
 	
 	<insert id="insertAccount" parameterType="java.util.Map">
@@ -36,7 +37,7 @@
 		VALUES
 		<foreach collection="list" item="item" separator=" , ">
 			 (	#{item.memberId}
-			  , DATE_FORMAT(#{item.tradeDate}, '%Y-%m-%d%h:%i:%s')
+			  , DATE_FORMAT(#{item.tradeDate}, '%Y-%m-%d %h:%i:%s')
 			  , #{item.withdrawAmt}
 			  , #{item.depositAmt}
 			  , #{item.afterAmt}
@@ -44,4 +45,17 @@
 			  )
 		</foreach>
 	</insert>
+	
+	<select id="getTargetAccountList" resultType="WhatDidIEatVo">
+		/* getTargetAccountList */
+		SELECT CM.CODE_ID
+			 , CM.CODE_NM
+			 , TARGET_BUDGET
+			 , COMMENT
+		  FROM CODE_MST CM,
+			   TARGET_ACCOUNT TA
+		 WHERE CM.CODE_ID = TA.CODE_ID
+		   AND CODE_TYPE = 'OUTLAY_TYPE'
+		 ORDER BY CASE WHEN CM.CODE_ID = 1 THEN 999 ELSE CM.CODE_ID END
+	</select>
 </mapper>
